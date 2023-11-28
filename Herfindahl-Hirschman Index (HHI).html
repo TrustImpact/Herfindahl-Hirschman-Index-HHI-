@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organisation Income Concentration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        h1, h2 {
+            color: #4e616c;
+        }
+        label {
+            display: block;
+            margin-top: 20px;
+            color: #4e616c;
+        }
+        input[type="number"], button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .message {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e2e2e2;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .low {
+            color: green;
+        }
+        .moderate {
+            color: orange;
+        }
+        .high {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Organisation Income Concentration: Herfindahl-Hirschman Index (HHI)</h1>
+    <form id="incomeForm">
+        <label for="grants">Grants (%):</label>
+        <input type="number" id="grants" name="grants"><br><br>
+        <label for="contracts">Contracts (%):</label>
+        <input type="number" id="contracts" name="contracts"><br><br>
+        <label for="individual_donations">Individual Donations (%):</label>
+        <input type="number" id="individual_donations" name="individual_donations"><br><br>
+        <label for="community_donations">Community Donations (%):</label>
+        <input type="number" id="community_donations" name="community_donations"><br><br>
+        <label for="corporate_donations">Corporate Donations (%):</label>
+        <input type="number" id="corporate_donations" name="corporate_donations"><br><br>
+        <label for="in_kind_support">In-Kind Support (%):</label>
+        <input type="number" id="in_kind_support" name="in_kind_support"><br><br>
+        <label for="events">Events (%):</label>
+        <input type="number" id="events" name="events"><br><br>
+        <label for="legacies">Legacies (%):</label>
+        <input type="number" id="legacies" name="legacies"><br><br>
+        <label for="earned_income">Earned Income (%):</label>
+        <input type="number" id="earned_income" name="earned_income"><br>
+        
+        <label>Total Percentage:</label>
+        <span id="totalPercentage">0</span>%<br>
+    </form>
+    <button onclick="calculateScore()">Calculate Total Score</button>
+    <h2>Total Score: <span id="totalScore">0</span></h2>
+    <div id="message" class="message"></div>
+</div>
+
+    <script>
+        var inputs = document.querySelectorAll('#incomeForm input');
+        inputs.forEach(function(input) {
+            input.addEventListener('input', updateTotalPercentage);
+        });
+
+        function updateTotalPercentage() {
+            var totalPercentage = 0;
+            inputs.forEach(function(input) {
+                var value = parseFloat(input.value) || 0;
+                totalPercentage += value;
+            });
+            document.getElementById('totalPercentage').textContent = totalPercentage.toFixed(2);
+        }
+
+        function calculateScore() {
+            var totalPercentage = 0;
+            var totalScore = 0;
+
+            inputs.forEach(function(input) {
+                var value = parseFloat(input.value) || 0;
+                totalPercentage += value;
+                totalScore += value * value;
+            });
+
+            if (totalPercentage !== 100) {
+                alert('Total percentage must be exactly 100');
+                return;
+            }
+
+            document.getElementById('totalScore').textContent = totalScore.toFixed(2);
+            var message = document.getElementById('message');
+            
+            if (totalScore < 1500) {
+                message.textContent = 'Income has low concentration and high distribution';
+                message.className = 'message low';
+            } else if (totalScore >= 1500 && totalScore < 2500) {
+                message.textContent = 'Income is moderately concentrated';
+                message.className = 'message moderate';
+            } else {
+                message.textContent = 'Income is highly concentrated in one or more categories';
+                message.className = 'message high';
+            }
+        }
+    </script>
+</body>
+</html>
