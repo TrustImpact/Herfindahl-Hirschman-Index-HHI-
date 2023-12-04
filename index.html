@@ -11,6 +11,20 @@
             margin: 0;
             padding: 20px;
         }
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px; /* Adjust spacing between rows */
+        }
+
+        .form-group label {
+            flex: 0 0 200px; /* Adjust label width as needed */
+            margin-right: 10px; /* Space between label and input */
+        }
+
+        .form-group input[type="number"] {
+            flex: 1; /* Input field takes up remaining space */
+        }
         .container {
             background-color: #fff;
             padding: 20px;
@@ -67,25 +81,31 @@
 <div class="container">
     <h1>Organisation Income Concentration: Herfindahl-Hirschman Index (HHI)</h1>
     <form id="incomeForm">
-        <label for="grants">Grants (%):</label>
-        <input type="number" id="grants" name="grants"><br><br>
-        <label for="contracts">Contracts (%):</label>
-        <input type="number" id="contracts" name="contracts"><br><br>
-        <label for="individual_donations">Individual Donations (%):</label>
-        <input type="number" id="individual_donations" name="individual_donations"><br><br>
-        <label for="community_donations">Community Donations (%):</label>
-        <input type="number" id="community_donations" name="community_donations"><br><br>
-        <label for="corporate_donations">Corporate Donations (%):</label>
-        <input type="number" id="corporate_donations" name="corporate_donations"><br><br>
-        <label for="in_kind_support">In-Kind Support (%):</label>
-        <input type="number" id="in_kind_support" name="in_kind_support"><br><br>
-        <label for="events">Events (%):</label>
-        <input type="number" id="events" name="events"><br><br>
-        <label for="legacies">Legacies (%):</label>
-        <input type="number" id="legacies" name="legacies"><br><br>
-        <label for="earned_income">Earned Income (%):</label>
-        <input type="number" id="earned_income" name="earned_income"><br>
-        
+        <div class="form-group">
+            <label for="grants">Grants (%):</label>
+            <input type="number" id="grants" name="grants"><br><br>
+            <label for="contracts">Contracts (%):</label>
+            <input type="number" id="contracts" name="contracts"><br><br>
+            <label for="individual_donations">Individual Donations (%):</label>
+            <input type="number" id="individual_donations" name="individual_donations"><br><br>
+        </div>
+    <div class="form-group">
+            <label for="community_donations">Community Donations (%):</label>
+            <input type="number" id="community_donations" name="community_donations"><br><br>
+            <label for="corporate_donations">Corporate Donations (%):</label>
+            <input type="number" id="corporate_donations" name="corporate_donations"><br><br>
+            <label for="in_kind_support">In-Kind Support (%):</label>
+            <input type="number" id="in_kind_support" name="in_kind_support"><br><br>
+        </div>
+    <div class="form-group">
+            <label for="events">Events (%):</label>
+            <input type="number" id="events" name="events"><br><br>
+            <label for="legacies">Legacies (%):</label>
+            <input type="number" id="legacies" name="legacies"><br><br>
+            <label for="earned_income">Earned Income (%):</label>
+            <input type="number" id="earned_income" name="earned_income"><br>
+        </div>
+    </form>
         <label>Total Percentage:</label>
         <span id="totalPercentage">0</span>%<br>
     </form>
